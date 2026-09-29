@@ -1,6 +1,6 @@
 # 3d-particle-effects-demo
 
-![](public/demo.png)
+![DEMO LINK](https://zvezda.zelva.live/)
 
 A demo of three techniques for creating 3D particle effects with Three.js.
 
