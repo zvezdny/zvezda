@@ -11,6 +11,7 @@ import {
   lorenzAttractor,
   lorenzMod2Attractor,
 } from './attractor';
+import { palettes, settings } from './palettes';
 
 const simulation = () =>
   Random.pick([
@@ -22,10 +23,22 @@ const simulation = () =>
     lorenzMod2Attractor,
   ]);
 
-function StormLine({ radius, simulation, width, color }) {
+function StormLine({ radius, simulation, width, colorIndex }) {
   const line = useRef();
+  const material = useRef();
+  const lastPalette = useRef(settings.palette);
+
+  const [positions, currentPosition] = useMemo(() => createAttractor(5), []);
 
   useFrame(() => {
+    // Recolor only when the palette changes
+    if (material.current && lastPalette.current !== settings.palette) {
+      material.current.uniforms.color.value.set(
+        palettes[settings.palette][colorIndex]
+      );
+      lastPalette.current = settings.palette;
+    }
+
     if (line.current) {
       const nextPosition = updateAttractor(
         currentPosition,
@@ -33,43 +46,41 @@ function StormLine({ radius, simulation, width, color }) {
         simulation,
         0.005
       );
-
       line.current.advance(nextPosition);
     }
   });
 
-  const [positions, currentPosition] = useMemo(() => createAttractor(5), []);
-
   return (
     <mesh>
       <meshLine ref={line} attach="geometry" points={positions} />
-      <meshLineMaterial transparent lineWidth={width} color={color} />
+      <meshLineMaterial
+        ref={material}
+        transparent
+        lineWidth={width}
+        color={palettes[settings.palette][colorIndex]}
+      />
     </mesh>
   );
 }
 
-export function SparkStorm({ count, colors, radius = 10 }) {
+export function SparkStorm({ count, radius = 20 }) {
   const lines = useMemo(
     () =>
-      new Array(count).fill().map(() => {
-        return {
-          color: Random.pick(colors),
-          width: Random.range(0.1, 0.2),
-          speed: Random.range(0.001, 0.002),
-          simulation: simulation(),
-          radius: Random.range(2, 2.25) * radius,
-        };
-      }),
-    [count, colors, radius]
+      new Array(count).fill().map(() => ({
+        colorIndex: Random.rangeFloor(0, 6), // fixed slot in the palette
+        width: Random.range(0.1, 0.9),
+        speed: Random.range(0.01, 0.2),
+        simulation: simulation(),
+        radius: Random.range(2, 2) * radius,
+      })),
+    [count, radius]
   );
 
   return (
     <group>
-      <group>
-        {lines.map((props, index) => (
-          <StormLine key={index} {...props} />
-        ))}
-      </group>
+      {lines.map((props, index) => (
+        <StormLine key={index} {...props} />
+      ))}
     </group>
   );
 }

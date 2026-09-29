@@ -56,10 +56,10 @@ export function SpaceDust({ count }) {
 
   return (
     <>
-      <pointLight ref={light} distance={40} intensity={8} color="lightblue" />
+      <pointLight ref={light} distance={20} intensity={4} color="red" />
       <instancedMesh ref={mesh} args={[null, null, count]}>
-        <dodecahedronBufferGeometry args={[0.2, 0]} />
-        <meshPhongMaterial color="#050505" />
+        <dodecahedronGeometry args={[.1, 0]} />
+        <meshPhongMaterial color="#45abff" />
       </instancedMesh>
     </>
   );

@@ -20,7 +20,6 @@ function SparkLine({ curve, width, color, speed }) {
         transparent
         depthTest={false}
         lineWidth={width}
-        color={color}
         dashArray={0.1}
         dashRatio={0.95}
       />
@@ -52,17 +51,16 @@ export function Sparks({ count, colors, radius = 10 }) {
         });
         const curve = new THREE.CatmullRomCurve3(points).getPoints(1000);
         return {
-          color: colors[parseInt(colors.length * Math.random(), 10)],
           width: Math.max(0.1, (0.2 * index) / 10),
           speed: Math.max(0.001, 0.004 * Math.random()),
           curve,
         };
       }),
-    [count, colors, radius]
+    [count, radius]
   );
 
   return (
-    <group position={[-radius * 2, -radius, -10]} scale={[1, 1.3, 1]}>
+    <group position={[-radius * 2, -radius, -10]} scale={[1, 1.6, 1]}>
       {lines.map((props, index) => (
         <SparkLine key={index} {...props} />
       ))}

@@ -1,14 +1,22 @@
-import React from 'react';
-import { TextureLoader } from 'three';
-
-const loader = new TextureLoader();
-const matcap = loader.load('wax_red.jpg');
+import React, { useEffect, useMemo } from 'react';
+import { useLoader, useFrame } from '@react-three/fiber';
+import { AnimationMixer } from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export const Planet = () => {
-  return (
-    <mesh>
-      <sphereBufferGeometry attach="geometry" args={[12, 32, 32]} />
-      <meshMatcapMaterial matcap={matcap} />
-    </mesh>
-  );
+  const gltf = useLoader(GLTFLoader, '/models/granny.glb'); // your real filename
+
+  const mixer = useMemo(() => new AnimationMixer(gltf.scene), [gltf]);
+
+  useEffect(() => {
+    console.log('animations:', gltf.animations); // check this in the console
+    if (gltf.animations.length) {
+      mixer.clipAction(gltf.animations[0]).play(); // loops forever by default
+    }
+    return () => mixer.stopAllAction();
+  }, [gltf, mixer]);
+
+  useFrame((_, delta) => mixer.update(delta)); // without this, it stays frozen
+
+  return <primitive object={gltf.scene} scale={10} />;
 };
