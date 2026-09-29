@@ -8,7 +8,6 @@
   "main": "src/index.js",
   "dependencies": {
     "@amcdnl/threejs-meshline": "^1.0.0",
-    "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^7.0.24",
     "canvas-sketch-util": "^1.10.0",
     "lil-gui": "^0.21.0",
