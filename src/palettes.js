@@ -15,4 +15,6 @@ export const palettes = {
 export const settings = {
   palette: 'cyberpunkNeon',
   lightIntensity: 8,
+  dustCount: 1500,
+  stormCount: 500,
 }

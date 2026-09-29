@@ -22,7 +22,7 @@ const colors = {
   frostbite:     ['#e0fbfc', '#c2dfe3', '#9db4c0', '#5c6b73', '#7ae7ff', '#ffffff'],
 };
 
-export function Scene() {
+export function Scene({ dustCount, stormCount }) {
   return (
     <Suspense fallback={null}>
       <>
@@ -30,10 +30,9 @@ export function Scene() {
         <pointLight distance={100} intensity={10} color="white" />
         <ambientLight intensity={1} />
         <group>
-          {/* <Planet /> */}
-          <SpaceDust count={3000} />
-          <Sparks count={20} />
-          <SparkStorm count={1000} />
+          <Planet />
+          <SpaceDust key={dustCount} count={dustCount} />
+          <SparkStorm key={stormCount} count={stormCount} />
         </group>
       </>
     </Suspense>
