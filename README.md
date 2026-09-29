@@ -2,14 +2,20 @@
 
 ![](public/demo.png)
 
-Code associated with the [Three ways to create 3D particle effects
-](https://varun.ca/three-js-particles) post.
+A demo of three techniques for creating 3D particle effects with Three.js.
 
-It demonstrates three techniques for creating particle systems
+It demonstrates three approaches to building particle systems:
 
 1. **Space Dust:** Using instanced meshes and oscillating their transforms.
 2. **Sparks:** Using dashed lines with an animated offset.
-3. **Spark storm:** By drawing a short line and advancing it step by step.
+3. **Spark Storm:** By drawing a short line and advancing it step by step.
+
+## Credits
+
+Original concept, code, and article by **[Varun Vachhar](https://github.com/winkerVSbecks)** ([varun.ca](https://varun.ca/three-js-particles)).
+
+- GitHub: [@winkerVSbecks](https://github.com/winkerVSbecks)
+- Blog post: [Three ways to create 3D particle effects](https://varun.ca/three-js-particles)
 
 ## Available Scripts
 
@@ -17,18 +23,20 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.\
+Runs the app in development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
+The page will reload if you make edits.
 You will also see any lint errors in the console.
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## License
+
+Please refer to the original project for licensing details before redistributing or reusing this code.
