@@ -8,6 +8,7 @@ import { Scene } from './Scene';
 import { palettes, settings } from './palettes';
 import './styles.css';
 
+
 extend({ MeshLine, MeshLineMaterial });
 
 export function App() {
