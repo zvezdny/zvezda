@@ -1,7 +1,10 @@
 {
-  "name": "stardust",
+  "name": "zvezda",
   "compatibility_date": "2026-09-26",
   "assets": {
     "directory": "./build"
+  },
+    "vars": {
+    "NODE_OPTIONS": "--openssl-legacy-provider"
   }
 }
